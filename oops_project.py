@@ -1,3 +1,5 @@
+import nlpcloud
+
 class NLPApp:
   def __init__(self) :
     self.__database = {}
@@ -65,6 +67,15 @@ class NLPApp:
     else:
         print('Invalid Credentials, Please try again')
         self.__initial_menu()
+
+  def __sentiment_analysis(self):
+    text = input('Enter the text for Sentiment Analysis')
+
+    client = nlpcloud.Client("finetuned-llama-3-70b", "8387408d6eca087378ea565611694c5b962a76e7", gpu=True)
+    res= client.sentiment(text)
+    print(res)
+   
+    
 
 
 obj = NLPApp()  
