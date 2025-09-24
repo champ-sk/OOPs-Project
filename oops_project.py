@@ -18,6 +18,25 @@ class NLPApp:
     else:
       exit()
 
+  def __second_menu(self): 
+
+    second_input = input("""
+    What would you like to do next?
+    1. NER
+    2. Sentiment Analysis
+    3.Language Detection
+    4.Exit""")
+
+    if second_input == '1':
+      self.__ner()
+    elif second_input == '2':
+      self.__sentiment_analysis()
+    elif second_input == '3':
+      self.__language_detection()
+    else:
+      exit()    
+    
+  
   def __register(self):
     name = input('Enter your Name')
     email = input('Enter your Email')
@@ -32,7 +51,21 @@ class NLPApp:
       self.__login()
 
   def __login(self):
-    print('login')   
+    email = input('Enter your Email')
+    password = input('Enter your Password')
+
+    if email in self.__database:
+      if self.__database[email][1] == password:
+        print(f'Welcome {self.__database[email][0]}')
+        self.__second_menu()
+      else:
+        print('Invalid Credentials, Please try again')
+        self.__login()  
+        # Proceed to NLP functionalities (not implemented here)
+    else:
+        print('Invalid Credentials, Please try again')
+        self.__initial_menu()
+
 
 obj = NLPApp()  
 
